@@ -1,19 +1,14 @@
+var dbConnection = require('../../config/dbConnection');
+
 module.exports = function(app){
+
+    var connection = dbConnection();
+
     app.get('/noticias', function(req, res){
-        var mysql = require('mysql');
-
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'site_noticias',
-            insecureAuth: true
-        });
-
         connection.query('select * from noticias', function(erro, result){
-            res.send(result);
+            //res.send(result);
+            res.render('noticias/noticias', {noticias: result})
             console.log(erro);
         });
-        //res.render("noticias/noticias");
     });
 }
