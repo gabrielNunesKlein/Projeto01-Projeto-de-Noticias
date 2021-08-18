@@ -1,5 +1,19 @@
 module.exports = function(app){
     app.get('/noticias', function(req, res){
-        res.render("noticias/noticias");
+        var mysql = require('mysql');
+
+        var connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'site_noticias',
+            insecureAuth: true
+        });
+
+        connection.query('select * from noticias', function(erro, result){
+            res.send(result);
+            console.log(erro);
+        });
+        //res.render("noticias/noticias");
     });
 }
