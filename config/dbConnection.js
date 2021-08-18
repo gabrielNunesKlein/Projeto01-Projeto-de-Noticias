@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 
-module.exports = function(){
+var connMySql = function(){
+    console.log("Conecxão foi estabelecida")
     return  mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -8,4 +9,9 @@ module.exports = function(){
         database: 'site_noticias',
         insecureAuth: true
     });
+} 
+
+module.exports = function(){
+    console.log("O autoload carregou o modulo de conecxao com o bd");
+    return connMySql;
 }
